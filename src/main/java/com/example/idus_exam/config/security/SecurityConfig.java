@@ -1,7 +1,7 @@
-package com.example.day0211.config.security;
+package com.example.idus_exam.config.security;
 
-import com.example.day0211.config.security.filter.JwtFilter;
-import com.example.day0211.config.security.filter.LoginFilter;
+import com.example.idus_exam.config.security.filter.JwtFilter;
+import com.example.idus_exam.config.security.filter.LoginFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

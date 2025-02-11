@@ -1,4 +1,4 @@
-package com.example.day0211.member.model;
+package com.example.idus_exam.member.model;
 
 public enum Gender {
     MALE, FEMALE, OTHER

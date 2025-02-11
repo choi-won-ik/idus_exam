@@ -1,7 +1,7 @@
-package com.example.day0211.config.security.filter;
+package com.example.idus_exam.config.security.filter;
 
-import com.example.inflearn.member.model.Member;
-import com.example.inflearn.utils.JwtUtil;
+import com.example.idus_exam.member.model.Member;
+import com.example.idus_exam.utils.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
