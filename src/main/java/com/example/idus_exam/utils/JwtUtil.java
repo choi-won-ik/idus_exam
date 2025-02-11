@@ -1,16 +1,18 @@
 package com.example.idus_exam.utils;
 
-import com.example.idus_exam.member.model.Gender;
+
 import com.example.idus_exam.member.model.Member;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
-
+@Component
 public class JwtUtil {
-    private static final String SECRET = "abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789";
+    public static final String SECRET = "abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz0123456789";
     private static final int EXP = 30 * 60 * 1000;
 
 
@@ -24,9 +26,8 @@ public class JwtUtil {
             return Member.builder()
                     .idx(claims.get("userIdx", Long.class))
                     .email(claims.get("userEmail", String.class))
-                    .nickName(claims.get("userEmail", String.class))
+                    .nickName(claims.get("userNickName", String.class))
                     .name(claims.get("userName",String.class))
-                    .gender(claims.get("userGender",Gender.class))
                     .build();
 
         } catch (ExpiredJwtException e) {
@@ -35,9 +36,8 @@ public class JwtUtil {
         }
     }
 
-    public static String generateToken(Long userIdx, String userEmail, String userNickName, Gender userGender,String name) {
+    public static String generateToken(Long userIdx, String userEmail, String userNickName, String name) {
         Claims claims = Jwts.claims();
-        claims.put("userGender", userGender);
         claims.put("userEmail", userEmail);
         claims.put("userNickName", userNickName);
         claims.put("userName", name);
