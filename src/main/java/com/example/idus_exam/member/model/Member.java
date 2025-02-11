@@ -28,12 +28,18 @@ public class Member implements UserDetails {
     @Unique
     private String email;
 
+    private boolean enabled;
+
     @Enumerated(EnumType.STRING)  // Enum 값을 문자열로 저장 (권장)
     private Gender gender;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
+    }
+
+    public void verify() {
+        this.enabled = true;
     }
 
     @Override
