@@ -24,14 +24,16 @@ public class JwtFilter extends OncePerRequestFilter {
             for(Cookie cookie : cookies) {
                 if(cookie.getName().equals("ATOKEN")) {
                     jwtToken = cookie.getValue();
+                    System.out.println(1);
                 }
             }
         }
 
         if(jwtToken != null) {
             Member member = JwtUtil.getMember(jwtToken);
-
+            System.out.println("2");
             if(member != null) {
+                System.out.println("3");
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                         new UsernamePasswordAuthenticationToken(member, null, member.getAuthorities());
                 usernamePasswordAuthenticationToken.setDetails(member);

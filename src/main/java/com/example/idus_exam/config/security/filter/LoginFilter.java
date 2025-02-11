@@ -55,7 +55,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         Member Member = (Member) authResult.getPrincipal();
-        String jwtToken = JwtUtil.generateToken(Member.getIdx(), Member.getEmail(), Member.getNickName(), Member.getGender(),Member.getName());
+        String jwtToken = JwtUtil.generateToken(Member.getIdx(), Member.getEmail(), Member.getNickName(),Member.getName());
 
         
 //        일반적인 객체 생성 및 객체의 변수에 값을 설정하는 방법
