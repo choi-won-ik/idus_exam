@@ -12,5 +12,11 @@ public class MemberController {
     @PostMapping("/signup")
     public void signup(@RequestBody MemberDto.SignupRequest request) {
         memberService.signup(request);
+
+    }
+
+    @GetMapping("/verify")
+    public void verify(String uuid) {
+        memberService.verify(uuid);
     }
 }

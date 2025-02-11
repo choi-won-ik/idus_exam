@@ -1,5 +1,6 @@
 package com.example.idus_exam.member;
 
+import com.example.idus_exam.emailverify.EmailVerifyService;
 import com.example.idus_exam.member.model.Member;
 import com.example.idus_exam.member.model.MemberDto;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
+    private final EmailVerifyService emailVerifyService;
 
     @Transactional
     public void signup(MemberDto.SignupRequest request) {
@@ -27,5 +29,16 @@ public class MemberService {
                 .build();
 
         memberRepository.save(member);
+
+        emailVerifyService.signup(member.getIdx(), member.getEmail());
+    }
+
+    @Transactional
+    public void verify(String uuid) {
+        Member member = emailVerifyService.verify(uuid);
+        if(member != null) {
+            member.verify();
+            memberRepository.save(member);
+        }
     }
 }
