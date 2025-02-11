@@ -19,4 +19,5 @@ public class MemberController {
     public void verify(String uuid) {
         memberService.verify(uuid);
     }
+
 }

@@ -4,13 +4,18 @@ import com.example.idus_exam.emailverify.EmailVerifyService;
 import com.example.idus_exam.member.model.Member;
 import com.example.idus_exam.member.model.MemberDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
-public class MemberService {
+public class MemberService implements UserDetailsService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmailVerifyService emailVerifyService;
@@ -40,5 +45,11 @@ public class MemberService {
             member.verify();
             memberRepository.save(member);
         }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return memberRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException(username+" 는 없는 아이디 입니다."));
     }
 }
