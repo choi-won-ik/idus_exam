@@ -38,6 +38,7 @@ public class Member implements UserDetails {
         return List.of();
     }
 
+
     public void verify() {
         this.enabled = true;
     }

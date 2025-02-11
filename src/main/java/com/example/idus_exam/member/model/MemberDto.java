@@ -17,4 +17,13 @@ public class MemberDto {
         private String email;
         private Gender gender;
     }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class LoginRequest {
+        private String email;
+        private String password;
+    }
 }
