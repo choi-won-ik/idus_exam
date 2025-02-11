@@ -1,9 +1,9 @@
-package com.example.day0211.config.security.filter;
+package com.example.idus_exam.config.security.filter;
 
 
-import com.example.inflearn.member.model.Member;
-import com.example.inflearn.member.model.MemberDto;
-import com.example.inflearn.utils.JwtUtil;
+import com.example.idus_exam.member.model.Member;
+import com.example.idus_exam.member.model.MemberDto;
+import com.example.idus_exam.utils.JwtUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -55,7 +55,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         Member Member = (Member) authResult.getPrincipal();
-        String jwtToken = JwtUtil.generateToken(Member.getIdx(), Member.getEmail(), Member.getNickName(), Member.getRole());
+        String jwtToken = JwtUtil.generateToken(Member.getIdx(), Member.getEmail(), Member.getNickName(), Member.getGender(),Member.getName());
 
         
 //        일반적인 객체 생성 및 객체의 변수에 값을 설정하는 방법

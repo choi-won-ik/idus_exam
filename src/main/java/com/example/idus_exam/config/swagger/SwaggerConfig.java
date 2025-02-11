@@ -1,4 +1,4 @@
-package com.example.day0211.config.swagger;
+package com.example.idus_exam.config.swagger;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

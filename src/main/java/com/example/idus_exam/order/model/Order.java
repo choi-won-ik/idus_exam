@@ -1,11 +1,9 @@
-package com.example.day0211.order.model;
+package com.example.idus_exam.order.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.checkerframework.checker.units.qual.Length;
-import org.checkerframework.common.aliasing.qual.Unique;
 
 import java.time.ZonedDateTime;
 

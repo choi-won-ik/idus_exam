@@ -1,4 +1,4 @@
-package com.example.day0211.config.db;
+package com.example.idus_exam.config.db;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
