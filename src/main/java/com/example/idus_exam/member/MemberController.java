@@ -1,9 +1,10 @@
 package com.example.idus_exam.member;
 
+import com.example.idus_exam.member.model.Member;
 import com.example.idus_exam.member.model.MemberDto;
-import jakarta.servlet.http.HttpServletRequest;
+import com.example.idus_exam.order.model.OrderDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
     private final MemberService memberService;
     @PostMapping("/signup")
-    public void signup(@RequestBody MemberDto.SignupRequest request) {
+    public void signup(@Valid @RequestBody MemberDto.SignupRequest request) {
         memberService.signup(request);
     }
 
@@ -21,5 +22,8 @@ public class MemberController {
         memberService.verify(uuid);
     }
 
-
+    @GetMapping("/detail/{idx}")
+    public MemberDto.MemberDetails detail(@PathVariable("idx") int idx) {
+        return memberService.detail(Long.valueOf(idx));
+    }
 }

@@ -1,7 +1,9 @@
 package com.example.idus_exam.order.model;
 
+import com.example.idus_exam.member.model.Member;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +13,8 @@ import java.time.ZonedDateTime;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +27,8 @@ public class Order {
 
     @Column(nullable = false)
     private ZonedDateTime paymentDate;
+
+    @ManyToOne
+    @JoinColumn(name="member_idx")
+    private Member member;
 }
