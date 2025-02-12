@@ -2,19 +2,20 @@ package com.example.idus_exam.order;
 
 import com.example.idus_exam.member.MemberRepository;
 import com.example.idus_exam.member.model.Member;
-import com.example.idus_exam.member.model.MemberDto;
 import com.example.idus_exam.order.model.Order;
 import com.example.idus_exam.order.model.OrderDto;
+import com.example.idus_exam.utils.TimeUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.awt.print.Pageable;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -35,5 +36,24 @@ public class OrderService {
                             .build()
             );
         }
+    }
+
+    public List<OrderDto.SearchReq> list(Long idx,int page, int size) {
+        Optional<List<Object[]>> op=memberRepository.findByList(idx, PageRequest.of(page, size));
+        List<OrderDto.SearchReq> list=new ArrayList<>();
+        if (op.isPresent()) {
+            List<Object[]> li=op.get();
+            for (Object[] row:li) {
+                ZonedDateTime zonedDateTime=TimeUtil.timeChange(row[2].toString());
+
+                list.add(OrderDto.SearchReq.builder()
+                                .orderNum(row[0].toString())
+                                .productName(row[1].toString())
+                                .paymentDate(zonedDateTime)
+                        .build());
+            }
+            return list;
+        }
+        return null;
     }
 }
